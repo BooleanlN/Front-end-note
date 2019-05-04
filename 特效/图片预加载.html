@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>图片预加载</title>
+	<style type="text/css">
+		html,body{
+			height: 100%;
+		}
+		.box{
+			text-align: center;
+
+		}
+		.btn{
+			display: inline-block;
+			height: 30px;
+			line-height: 30px;
+			border: 1px solid #ccc;
+			padding:  0 10px;
+			margin-right: 50px;
+			color:#333;
+		}
+		.btn:hover{
+			background-color: orange;
+			color: white;
+		}
+		.loading{
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background-color: #eee;
+			font-size: 30px;
+			text-align: center;
+		}
+		.loading p{
+			margin-top: 300px;
+		}
+	</style>
+</head>
+<body>
+	<div class="box">
+		<img src="https://cn.bing.com/th?id=OHR.RuffLek_ZH-CN8485019267_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp" width="1200px" id="img" alt="pic">
+		<p>
+			<button data-control="prev" class="btn">上一页</button>
+			<button data-control="next" class="btn">下一页</button>
+		</p>
+	</div>
+	<div class="loading">
+		<p class="progress">0%</p>
+	</div>
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+	<script type="text/javascript" src="js/preload.js"></script>
+	<script type="text/javascript">
+		var imgs = ["https://cn.bing.com/th?id=OHR.RuffLek_ZH-CN8485019267_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp",
+					"https://cn.bing.com/th?id=OHR.MargaretRiverVineyards_ZH-CN8547374435_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp",
+					"https://cn.bing.com/th?id=OHR.may1_ZH-CN8582006115_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp",
+					"https://cn.bing.com/th?id=OHR.GlenfinnanViaduct_ZH-CN8400951216_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp"
+					];
+
+		var index = 0,
+			len = imgs.length,
+			count = 0,
+			$progress = $('.progress');
+		//采用插件
+		$.preload(imgs,{
+			each:function(count){
+				$progress.html(Math.round((count+1)/len * 100)+'%');
+			},
+			all:function(){
+				$('.loading').hide();
+		 		document.title = '1/'+len;
+			}
+		});
+		//不采用插件
+		// $.each(imgs,function(i,src){
+		// 	var imgObj = new Image();
+		// 	$(imgObj).on("load error",function(){
+		// 		$progress.html(Math.round((count+1)/len * 100)+'%');
+		// 		if(count>=len-1){
+		// 			$('.loading').hide();
+		// 			document.title = '1/'+len;
+		// 		}
+		// 		count++;
+		// 	});
+		// 	imgObj.src = src;
+		// })
+		$(".btn").on("click",function(){
+			if($(this).data('control')==='prev'){
+				index = Math.max(0,--index);
+			}else{
+				index = Math.min(len-1,++index);
+			}
+			document.title = (index+1)+'/'+len;
+			console.log(imgs[index]);	
+			$('#img').attr('src',imgs[index]);
+		});
+	</script>
+</body>
+</html>

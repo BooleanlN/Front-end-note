@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>v-bind及class与style绑定</title>
+</head>
+<body>
+	<p>v-bind可以动态更新html元素上的属性</p>
+	<div id="app">
+		<div class="static" :class="{'active':isActive,'error':isError}">
+			<span>dsf</span>
+		</div>
+	</div>
+	<div id="app2">
+		<div :class="classes">
+			<p>绑定计算属性或method</p>
+		</div>
+		<div :class="[activeCls,errorCls]">
+			<p>使用数组</p>
+		</div>
+	</div>
+		<script  src="https://unpkg.com/vue@2.6.10/dist/vue.min.js"></script>
+		<script type="text/javascript">
+			var app = new Vue({
+				el:'#app',
+				data:{
+					isActive:true,
+					isError:false
+				}
+			});
+			var app2 = new Vue({
+				el:'#app2',
+				data:{
+					isActive:true,
+					error:null,
+					activeCls:'active',
+					errorCls:'error'
+				},
+				computed:{
+					classes:function(){
+						return {
+							active:this.isActive&&!this.error,
+							'text-fail':this.error&&this.error==='fail'
+						}
+					}
+				}
+			})
+		</script>
+</body>
+</html>

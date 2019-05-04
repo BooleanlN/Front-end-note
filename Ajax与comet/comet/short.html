@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>短查询</title>
+</head>
+<body>
+	<h3>短查询</h3>
+	<p>浏览器每间隔一段时间就向服务器询问，看看有没有更新的数据</p>
+	<script type="text/javascript">
+		var timer = setInterval(function(){
+			var xhr = new XMLHttpRequest();
+			xhr.onload = function(){
+				if(xhr.readyState == 4)
+				{	
+					if((xhr.status>=200&&xhr.status<300)||xhr.status===304)
+					{
+						console.log(xhr.responseText);
+					}else{
+						console.log("Request was fail"+xhr.status);
+					}
+				}
+			}
+			xhr.open("get","https://www.apiopen.top/novelApi",true);
+			//xhr.setRequestHeader("Myheader","Myvalue");
+			xhr.send(null);
+		},5000);
+	</script>
+</body>
+</html>

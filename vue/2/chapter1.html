@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>计算属性</title>
+</head>
+<body>
+	<div id="app">
+		{{reverseText}}
+	</div>
+	<script  src="https://unpkg.com/vue@2.6.10/dist/vue.min.js"></script>
+	<script>
+		var app = new Vue({
+			el:'#app',
+			data:{
+				text:'123,456'
+			},
+			computed:{
+				reverseText:function(){
+					return this.text.split(',').reverse().join(',');
+				}
+			}
+		})
+	</script>
+</body>
+</html>

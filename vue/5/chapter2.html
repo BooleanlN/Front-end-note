@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>绑定值</title>
+</head>
+<body>
+	<div id="app">
+		<p>动态数据，v-model绑定值是一个动态变量，通过v-bind将value与变量绑定在一起</p>
+		<input type="radio" name="" v-model="picked" :value="value">
+		<p>{{value}}</p>
+		<p>{{picked}}</p>
+		<input type="checkbox" name="" v-model="toggle" :true-value="value1" :false-value="value2">
+		<label>复选框</label>
+		<p>{{toggle}}</p>
+		<p>{{value1}}</p>
+		<p>{{value2}}</p>
+	</div>
+	<script  src="https://unpkg.com/vue@2.6.10/dist/vue.min.js"></script>
+	<script type="text/javascript">
+		var app = new Vue({
+			el:'#app',
+			data:{
+				picked:false,
+				value:123,
+				toggle:false,
+				value1:'a',
+				value2:'b'
+			}
+		});
+	</script>
+</body>
+</html>

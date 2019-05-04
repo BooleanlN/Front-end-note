@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>表单与V-model</title>
+</head>
+<body>
+	<div id="app">
+		<p>使用v-model后，表单控件显示的值只依赖于所绑定的数据，不再关心初始化的value，对于text也不再显示</p>
+		<input type="text" v-model="message" name="">
+		<p>输入内容为：{{message}}</p>
+		<textarea v-model="text" placeholder="输入..."></textarea>
+		<p>输入内容为：</p>
+		<p style="white-space: pre">{{text}}</p>
+		<p>单选按钮</p>
+		<input type="radio" name="ss" v-model="bepicked" value="tt">
+		<label>单选annual</label>
+		<div>
+			<input type="radio" name="" v-model="bepicked" value="html">
+			<label>HTML</label>
+			<br>
+			<input type="radio" name="" v-model="bepicked" value="js">
+			<label>JAVASCRIPT</label>
+			<br>
+			<input type="radio" name="" v-model="bepicked" value="css">
+			<label>CSS</label>
+			<br>
+			<p>选择的项是:{{bepicked}}</p>
+		</div>
+		<p>复选框：v-model绑定后，点选后，会自动push进数组，取消点选会自动splice</p>
+		<div>
+			<input type="checkbox" name="" v-model="checked" value="html" id="html">
+			<label for="html">HTML</label>
+			<br>
+			<input type="checkbox" name="" v-model="checked" value="js" id="js">
+			<label for="js">JAVASCRIPT</label>
+			<br>
+			<input type="checkbox" name="" v-model="checked" value="css" id="css">
+			<label for="css">CSS</label>
+			<br>
+			<p>选择的元素有:{{checked}}</p>
+		</div>
+		<p>选择列表:</p>
+		<select v-model="selected">
+			<option value="html">html</option>
+			<option value="js">JAVASCRIPT</option>
+			<option>css</option>
+		</select>
+		<p>选择的元素是{{selected}}</p>
+		<div>
+			<select v-model="mselected" multiple>
+			<option value="html">html</option>
+			<option value="js">JAVASCRIPT</option>
+			<option>css</option>
+		</select>
+		<p>选择的元素是{{mselected}}</p>
+		</div>
+	</div>
+	<script  src="https://unpkg.com/vue@2.6.10/dist/vue.min.js"></script>
+	<script type="text/javascript">
+		var app = new Vue({
+			el:'#app',
+			data:{
+				message:'',
+				text:'',
+				picked:true,
+				bepicked:'',
+				checked:[],
+				selected:'',
+				mselected:[]
+			}
+		})
+	</script>
+</body>
+</html>

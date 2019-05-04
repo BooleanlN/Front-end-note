@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>DOM-Node</title>
+</head>
+<body>
+	<strong>Node类型</strong>
+	<div id="node">ss
+		<p id="p_node">测试节点</p>
+	</div>
+	<div style="width: 60%">
+		<article>
+			<strong>Node类型</strong>
+			<section>DOM1定义了一个Node接口，该接口由DOM中的所有节点类型实现，Node接口在JS中作为Node类型实现，Js中所有节点类型都继承自该Node类型。
+			<ul>
+				<li>每个节点都会有nodeType属性，用于表明节点类型</li>
+				<li>nodeName，节点名称</li>
+				<li>nodeValue，节点值，元素类型一直为null</li>
+				<li>childNodes,返回NodeList对象，保存一组有序的节点</li>
+				<li>parentNode，指向文档树中的父节点</li>
+				<li>previousSibling和nextSibling，指向同一列表的同胞节点</li>
+				<li>ownerDocument，指向表示整个文档的文档节点</li>
+			</ul>
+			</section>
+			<strong>节点操作</strong>
+			<section>
+				因为关系指针都是只读的，所以DOM提供了一些操作节点的方法。
+				<ul>
+					<strong>有孩子节点的方法</strong>
+					<li>appendchild(),在childNode列表末尾添加新节点，如果传入节点之前已存在，则将其移至新位置</li>
+					<li>insertBefore(a,b),将a插入到b节点之前</li>
+					<li>replaceChild(a,b),用a节点替换b节点，且复制所有节点关系给a，且将b节点从文档树移除</li>
+					<li>removeChild(a),将a节点从文档树中移除</li>
+					<strong>所以类型节点都有的方法</strong>
+					<li>cloneNode(),创建调用该节点的一个完全相同的副本,若为true则执行深复制，否则浅复制</li>
+					<li>normalize()，处理文档树中的文本节点</li>
+				</ul>
+			</section>
+		</article>
+	</div>
+	<script type="text/javascript">
+		var node = document.getElementById('node');//获取节点
+		console.log(node.nodeType);
+		console.log(node.nodeName);
+		console.log(node.childNodes);
+		var p_node = document.getElementById('p_node');
+		var v_node = node.childNodes[0];
+		console.log(p_node.nodeValue);
+		console.log(v_node.nodeValue);
+		console.log(v_node.parentNode);
+		console.log(v_node.previousSibling);
+		console.log(v_node.nextSibling);
+		var newNode = document.createElement('p');
+		newNode.innerHTML = "新节点";
+		//node.appendChild(newNode);
+		node.insertBefore(newNode,p_node);
+		var copynode = node.cloneNode();//浅复制
+		console.log(copynode.childNodes.length);
+		var deepcopynode = node.cloneNode(true);//深复制
+		console.log(deepcopynode.childNodes.length);
+	</script>
+</body>
+</html>

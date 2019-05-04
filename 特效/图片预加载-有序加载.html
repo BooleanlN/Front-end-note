@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>图片预加载-有序加载</title>
+	<style>	
+		.box{
+			text-align: center;
+
+		}
+		.btn{
+			display: inline-block;
+			height: 30px;
+			line-height: 30px;
+			border: 1px solid #ccc;
+			padding:  0 10px;
+			margin-right: 50px;
+			color:#333;
+		}
+		.btn:hover{
+			background-color: orange;
+			color: white;
+		}
+	</style>
+</head>
+<body>
+	<div class="box">
+		<img src="https://images.dmzj.com/img/chapterpic/20588/56056/14752173317542.jpg"  id="img" alt="pic">
+		<p>
+			<button data-control="prev" class="btn">上一页</button>
+			<button data-control="next" class="btn">下一页</button>
+		</p>
+	</div>
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+	<script type="text/javascript" src="js/preload.js"></script>
+	<script type="text/javascript">
+		var images = [
+			"https://images.dmzj.com/img/chapterpic/20588/56056/14752173317542.jpg",
+			"https://images.dmzj.com/img/chapterpic/20588/56056/14752173323614.jpg",
+			"https://images.dmzj.com/img/chapterpic/20588/56056/14752173329716.jpg"
+		];
+		var index = 0,
+			len = images.length,count=0;
+		//使用插件
+		$.preload(images,{
+			order:'ordered'
+		});
+		load();
+		function load(){
+			var imObj = new Image();
+			$(imObj).on('load error',function(){
+				if(count>=len){
+					//图片都已加载完毕 
+				}else{
+					load();
+				}
+				count++;
+			});
+			imObj.src = images[count];
+		}
+		$(".btn").on("click",function(){
+			if($(this).data('control')==='prev'){
+				index = Math.max(0,--index);
+			}else{
+				index = Math.min(len-1,++index);
+			}
+			document.title = (index+1)+'/'+len;
+			console.log(images[index]);	
+			$('#img').attr('src',images[index]);
+		});
+	</script>
+</body>
+</html>

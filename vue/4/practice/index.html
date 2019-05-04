@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>购物车</title>
+	<link rel="stylesheet" type="text/css" href="index.css">
+</head>
+<body>
+	<div id="app" v-cloak>
+		<template v-if="items.length"> 
+			<div class="sheet">
+			<table cellpadding="0" style="border:1px solid #ccc;">
+				<thead>
+					<tr>
+					<th></th><th>商品名称</th><th>商品单价</th><th>购买数量</th><th>操作</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr v-for="(item,index) in items"><td>{{index+1}}</td><td>{{item.name}}</td><td>{{item.price}}</td>
+					<td><button @click="handleReduce(item.id)" :disabled="item.count===1">-</button>{{item.count}}<button @click="handleAdd(item.id)">+</button></td>
+					<td><button @click="remove(index)">移除</button></td>
+					</tr>
+				</tbody>
+			</table>
+			<div>总价:￥{{sum}}</div>
+		</div>
+		</template>
+		<div v-else>购物车为空</div>
+	</div>
+	<script  src="https://unpkg.com/vue@2.6.10/dist/vue.min.js"></script>
+	<script type="text/javascript">
+		var app = new Vue({
+			el:'#app',
+			data:{
+				items:[
+					{id:1,name:'iPhone7',price:6188,count:1},
+					{id:2,name:'iPad Pro',price:5888,count:1},
+					{id:3,name:'MacBook Pro',price:21488,count:1},
+				],
+			},
+			methods:{
+				handleAdd:function(index){
+					this.items[index-1].count++;
+				},
+				handleReduce:function(index){
+					this.items[index-1].count===1?1:this.items[index-1].count--;
+				},
+				remove:function(index){
+					this.items.splice(index,1);
+				}
+			},
+			computed:{
+				sum:function(){
+					let sum = 0;
+					for (let i =0; i <this.items.length; i++) {
+						sum+=this.items[i].price*this.items[i].count;			
+					}
+					return sum.toString().replace(/\B(?=(\d{3})+$)/g,',');
+			}
+			}
+		})
+	</script>
+</body>
+</html>

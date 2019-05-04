@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>AJAX 1级</title>
+</head>
+<body>
+	<input type="text" name="userid"  id="userid"> 
+	<button onclick="psot()">上传</button>
+	<script type="text/javascript" src="ajax.js"></script>
+	<script type="text/javascript">
+		var xhr = createXHR();
+		xhr.onreadystatechange = function(){
+			if(xhr.readyState == 4)
+			{	
+				console.log(",");
+				if((xhr.status>=200&&xhr.status<300)||xhr.status===304)
+				{
+					console.log(xhr.responseText);
+					console.log(xhr.getAllResponseHeaders());
+				}else{
+					console.log("Request was fail"+xhr.status);
+				}
+			}else
+			{
+				console.log(xhr.readyState);
+			}
+		}
+		//true表示异步请求
+		xhr.open("get","https://www.apiopen.top/novelApi",true);
+		//xhr.setRequestHeader("Myheader","Myvalue");
+		xhr.send(null);
+		//异步，下方语句会先输出
+		console.log("证明是异步请求!");
+	</script>
+	<script type="text/javascript">
+		var xhr2 = createXHR();
+		xhr2.onreadystatechange = function(){
+			if(xhr2.readyState == 4)
+			{	
+				console.log(",");
+				if((xhr2.status>=200&&xhr2.status<300)||xhr2.status===304)
+				{
+					console.log(xhr2.responseText);
+					console.log(xhr2.getAllResponseHeaders());
+				}else{
+					console.log("Request was fail"+xhr2.status);
+				}
+			}else
+			{
+				console.log(xhr2.readyState);
+			}
+		}
+		let url = "https://www.apiopen.top/novelSearchApi";
+		url = addURLParam(url,"name","盗墓");
+				//true表示异步请求
+		xhr2.open("get",url,true);
+		xhr2.send(null);
+	</script>
+	<script type="text/javascript">
+		function psot(){
+			var xhr_post = createXHR();
+			xhr_post.onreadystatechange = function(){
+				if(xhr_post.readyState == 4)
+				{	
+					console.log(",");
+					if((xhr_post.status>=200&&xhr_post.status<300)||xhr_post.status===304)
+					{
+						console.log(xhr_post.responseText);
+						console.log(xhr_post.getAllResponseHeaders());
+					}else{
+						console.log("Request was fail"+xhr_post.status);
+					}
+				}else
+				{
+					console.log(xhr_post.readyState);
+				}
+			}
+			 let url = "http://localhost:8080/server.php";
+			// 		//true表示异步请求
+			 xhr_post.open("POST",url,true);
+			// xhr_post.setRequestHeader('Content-Type',"application/x-www-form-urlencoded")
+			 var formdata = new FormData();
+			 formdata.append("userid","11");
+			 xhr_post.send(formdata);
+		}
+	</script>
+</body>
+</html>

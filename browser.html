@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>javascript-浏览器检测</title>
+</head>
+<body>
+	<ul>
+		<li>能力检测</li>
+		<li>怪癖检测</li>
+		<li>用户代理检测</li>
+	</ul>
+	<script type="text/javascript">
+		//查询对象是否具有某特性
+		function isHostMethod(object,prop) {
+			// body...
+			var t = typeof object[prop];
+			return t=='function'||(!!(t=='object'&&object[prop]))||t=='unknown';
+		}
+		//是否支持Netscape风格插件
+		var hasNSPlugins = !!(navigtor..plugins && navigtor.plugins.length);
+		//是否具有DOM1级规定能力
+		var hasDom1  = !!(document.getElementById && document.createElement && document.getElementByTagName);
+	</script>
+</body>
+</html>

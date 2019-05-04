@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>绑定内联样式</title>
+</head>
+<body>
+	<div id="app">
+		<div :style="{'color':color,'font-size':fontsize+'px'}">文本</div>
+		<div :style="styles">文本</div>
+		<!-- <div :style="stylefun">文本</div> -->
+	</div>
+	<script  src="https://unpkg.com/vue@2.6.10/dist/vue.min.js"></script>
+	<script type="text/javascript">
+		var app = new Vue({
+			el:'#app',
+			data:{
+				color:'red',
+				fontsize:14,
+				styles:{
+					color:'green',
+					fontsize:14,
+				},
+			computed:{
+				stylefun:function(){
+					return {
+						color:'yellow',
+						fontsize:14,
+					};
+				}
+			}
+			}
+		})
+	</script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>	
+<head>
+	<title>CSS3-边框篇</title>
+	<style type="text/css">
+		.radix{
+			border:2px solid;
+			border-radius: 5px;	
+			-moz-border-radius:5px;
+			width:100px;
+			height: 40px;
+			text-align: center;
+			line-height: 40px;
+		}
+		.shadow{
+			width:100px;
+			height: 40px;
+			box-shadow: 10px 10px 5px #888888;
+			text-align: center;
+			line-height: 40px;
+		}
+		.border_img{
+			border:15px solid transparent;
+			padding:10px 20px;
+			border-image:url(border.png) 30 30 round;
+			-moz-border-image:url(border.png) 30 30 round;
+			-webkit-border-image:url(border.png)30 30 round;
+			-o-border-image:url(border.png) 30 30 round;
+		}
+		.border_img_str{
+			border:15px solid transparent;
+			padding:10px 20px;
+			border-image:url(border.png) 30 30 stretch;
+			-moz-border-image:url(border.png) 30 30 stretch;
+			-webkit-border-image:url(border.png)30 30 stretch;
+			-o-border-image:url(border.png) 30 30 stretch;
+		}
+	</style>
+</head>
+<body>
+	<h2>CSS3</h2>
+	<em>CSS3向下兼容</em>
+	<strong>CSS3边框</strong>
+	<p>圆角矩阵(border-radius)</p>
+	<div class="radix">
+		圆角矩阵
+	</div>
+	<p>边框阴影</p>
+	<div class="shadow">
+		边框阴影
+	</div>
+	<p>边框图片</p>
+	<div class="border_img">
+		边框图片
+	</div>
+	<div class="border_img_str">
+		边框图片，拉伸版
+	</div>
+</body>
+</html>

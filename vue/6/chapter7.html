@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>组件通信-非父子组件通信——2</title>
+</head>
+<body>
+	<div id="app">
+		{{message}}
+		<p>使用this.$parent可访问到父实例或组件，父组件可以通过$children访问到子组件</p>
+		<strong>该方法不推荐使用，容易造成父子组件的紧耦合，影响程序可读性</strong>
+		<my-component></my-component>
+		<p>使用ref属性，为子组件指定索引名称，父组件中通过this.$refs进行访问	</p>
+		<p ref="p">内容</p>
+		<my-component ref="comA"></my-component>
+	</div>
+	<script src="https://unpkg.com/vue@2.6.10/dist/vue.min.js"></script>
+	<script type="text/javascript">
+		Vue.component('my-component',{
+			template:'<button @click="handleEvent">通过父链直接修改数据</button>',
+			methods:{
+				handleEvent:function(){
+					this.$parent.message = "来自组件my-cm的内容";
+				},
+			data:function(){
+				return{
+					childMess:"",
+				}
+			},
+			}
+		});
+		var app = new Vue({
+			el:'#app',
+			data:{
+				message:''
+			},
+			methods:{
+				handleRef:function(){
+					var msg = this.$refs;
+					console.log(msg);
+				}
+			}
+
+		})
+	</script>
+</body>
+</html>

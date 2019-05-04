@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>组件高级用法-动态组件</title>
+</head>
+<body>
+	<div id="app">
+		<component :is="currentView"></component>
+		<button @click="handleChangeView('A')">A</button>
+		<button @click="handleChangeView('B')">B</button>
+		<button @click="handleChangeView('C')">C</button>
+	</div>
+	<script src="https://unpkg.com/vue@2.6.10/dist/vue.min.js"></script>
+	<script type="text/javascript">
+		var app = new Vue({
+			el:'#app',
+			data:{
+				currentView:'comA'
+			},
+			components:{
+				comA:{
+					template:'<div>A组件</div>'
+				},
+				comB:{
+					template:'<div>B</div>'
+				},
+				comC:{
+					template:'<div>C</div>'
+				}
+			},
+			methods:{
+				handleChangeView:function(temp){
+					this.currentView = 'com'+temp;
+				}
+			}
+		})
+	</script>
+</body>
+</html>

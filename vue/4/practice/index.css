@@ -1,0 +1,7 @@
+td{
+	border-right: 1px #ccc solid;
+	border-top: 1px #ccc solid;
+},
+[v-cloak]{
+	display: none;
+}

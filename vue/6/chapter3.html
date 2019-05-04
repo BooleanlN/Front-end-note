@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>使用props传递数据</title>
+</head>
+<body>
+	<div id="app">
+		<p>组件中，使用选项props来声明需要从父级接收的数据，props的值可以是两种，一种是字符串数组，一种是对象</p>
+		<p>与组件data函数相比，props来自父级，	而data中的是组件自己的数据，作用域是组件本身</p>
+		<p>当使用DOM模板时，驼峰命名的props名称要转为短横分割命名</p>
+		<my-component message="来自父组件的数据"  t-t="kk"></my-component>
+		<p>与父级动态数据绑定</p>
+		<input type="text" name="" v-model="parentMessage">
+		<my-component :message="parentMessage"></my-component>
+	</div>
+	<script  src="https://unpkg.com/vue@2.6.10/dist/vue.min.js"></script>
+	<script type="text/javascript">
+		Vue.component('my-component',{
+			props:['message','tT'],
+			template:'<div>{{message}}<strong>{{tT}}</strong></div>'
+		})
+		var app = new Vue({
+			el:'#app',
+			data:{
+				parentMessage:''
+			}
+		})
+	</script>
+</body>
+</html>

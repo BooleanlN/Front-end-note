@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>事件</title>
+</head>
+<body>
+	<button id="btn">按钮</button>
+	<script type="text/javascript">
+		var btn = document.getElementById('btn');
+		//事件处理程序
+		var EventUtil = {
+			addHandler:function(element,type,handler){
+				if(element.addEventListener){
+					//Dom 2 级方法
+					element.addEventListener(type,handler,false);
+				}else if(element.attachEvent){
+					//IE 方法
+					element.attachEvent("on"+type,handler);
+				}else{
+					//Dom 0 级 方法
+					element["on"+type] = handler;
+				}
+			},
+			removeHandler:function(element,type,handler){
+				if(element.removeEventListener){
+					element.removeEventListener(type,handler,false);
+				}else if(element.detachEvent){
+					element.detachEvent("on"+type,handler);
+				}else{
+					element["on"+type] = null;
+				}
+			}
+		}
+		EventUtil.addHandler(btn,"click",function(event){
+			console.log(event);
+		})
+	</script>
+</body>
+</html>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>移动应用图片文字识别系统</title>
+</head>
+<body>
+	<div id="app">
+		<label for="step">步伐</label>
+		<input type="Number" name="step" v-model="step">
+		<!-- 		value是为了将组件中的value值同步给父组件，这也是input必要的需求 -->
+		<input-number max-value=10  min-value="0"	v-model="value" :step="step"></input-number>
+	</div>
+	<script  src="https://unpkg.com/vue@2.6.10/dist/vue.min.js"></script>
+	<script type="text/javascript">
+		function isValueNumber(value){
+			return (/(^-?[1-9]d*$)/).test(value+'');
+
+		}
+		Vue.component('inputNumber',{
+		props:{
+			//增长极限
+			maxValue:{
+				type:Number,
+				default:Infinity
+			},
+			//减小极限
+			minValue:{
+				type:Number,
+				default:-Infinity
+			},
+			//绑定父组件的value
+			value:{
+				type:Number,
+				default:0
+			},
+			//增长步长
+			step:{
+				type:Number,
+				default:1
+			}
+		},
+		data:function(){
+			return {
+				currentValue:this.value//当前值，与父组件value相等
+			}
+		},
+		//watch监听某个prop或者data的变化，发生变化时触发watch内函数
+		watch:{
+			//currentValue变化时通知父组件value
+			currentValue:function(val){
+				this.$emit('input',val);
+				this.$emit('on-change',val);
+			},
+			value:function(val){
+				this.updateValue(val);
+			},
+		},
+		template:'\
+		<div class="input-number">\
+			<input type="text"\
+				   :value="currentValue"\
+				   @keydown="handleKeyDown"\
+				   @change="handleChange"\
+				   />\
+			<button\
+				   @click="handleDown"\
+				   :disabled="currentValue<=minValue">-</button>\
+			<button\
+				   @click="handleUp"\
+				   :disabled="currentValue>=maxValue">+</button>\
+		</div>',
+		methods:{
+			updateValue:function(val){
+				if(val>this.maxValue)val = this.maxValue;
+				if(val<this.minValue)val = this.minValue;
+				this.currentValue = val;
+			},
+			handleDown:function(){
+				if (this.currentValue<=this.minValue)return;
+				this.currentValue-=1;
+			},
+			handleUp:function(){
+				let step = Number(this.step);//从父组件拿到的step是string类型，需转换
+				if (this.currentValue+step>=this.maxValue)
+				{
+					this.currentValue = this.maxValue;
+					return;
+				}
+					this.currentValue+=step;
+			},
+			handleChange:function(event){
+				var val = event.target.value.trim();//情空空格
+				var max = this.maxValue;
+				var min = this.minValue;
+				if(isValueNumber(val)){
+					val = Number(val);
+					this.currentValue = val;
+					if(val<min)this.currentValue = min;
+					else if(val>max) this.currentValue = max;
+				}else{
+					event.target.value = this.currentValue;
+				}
+			},
+			//上下按键增减
+			handleKeyDown:function(event){
+				if(event.keyCode===38)
+				{
+					if (this.currentValue>=this.maxValue)return;
+					this.currentValue+=1;
+				}else if(event.keyCode===40)
+				{
+					if (this.currentValue<=this.minValue)return;
+					this.currentValue-=1;
+				}
+			}
+		},
+		//挂载时检查初始值
+		mounted:function(){
+			this.updateValue(this.value);
+		},
+	});
+		var app = new Vue({
+		el:'#app',
+		data:{
+			value:5,
+			step:1,
+		}
+})
+	</script>
+	<!-- <script  src="input-number.js"></script>
+	<script  src="input.js"></script> -->
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>SSE</title>
+	<meta charset="utf-8">
+</head>
+<body>
+	<h3>SSE-Server-Sent Events</h3>
+	<div style="width:60%">
+	<article>
+		服务器发送事件,是围绕只读Comet交互推出的API或者模式，SSE用于创建到服务器的单向连接，服务器可以通过该连接发送任意数量的数据
+		服务器响应的类型必须是text/event-stream,而且是浏览器中的jsAPI能解析格式输出
+		SSE支持短轮询，长轮询和HTTP流
+	</article>
+	</div>
+	<script type="text/javascript">
+		var source = new EventSource('sse.php');//传入的URL必须同源
+		console.log(source.readyState);
+		source.onmessage = function(event){
+			console.log(event);
+			var data = event.data;
+			console.log(data);
+		};
+		source.onopen = function(){
+			console.log(source.readyState);
+			console.log("Server open");
+		};
+		// source.onerror = function(event){
+		// 	console.log("Error");
+		// 	console.log(event);
+		// };
+	</script>
+</body>
+</html>

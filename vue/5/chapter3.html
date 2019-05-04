@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>修饰符</title>
+</head>
+<body>
+	<p>v-model修饰符，用于控制数据同步的时机</p>
+	<div id="app">
+		<p>lazy,input在失焦或者按回车时才更新</p>
+		<input type="text" name="" v-model.lazy="message">
+		<p>{{message}}</p>
+		<p>number,用于将内容转换为Number类型</p>
+		<input type="number" name="" v-model.number="text">
+		<p>{{typeof text}}</p>
+		<p>trim,自动过滤输入的首尾空格</p>
+		<input type="text" name="" v-model.trim="str">
+		<p>{{str}}</p>
+		<p>{{str.length}}</p>
+	</div>
+	<script  src="https://unpkg.com/vue@2.6.10/dist/vue.min.js"></script>
+	<script type="text/javascript">
+		var app = new Vue({
+			el:'#app',
+			data:{
+				message:'',
+				text:'',
+				str:'',
+			}
+		})
+	</script>
+</body>
+</html>

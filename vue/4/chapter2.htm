@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>条件渲染指令</title>
+</head>
+<body>
+	<div id="app">
+		<p v-if="status===1">status == 1</p>
+		<p v-else-if="status === 2">status == 2</p>
+		<p v-else>否则显示这行</p>
+		<button @click="changeStatus">嫦娥</button>
+	</div>
+<script  src="https://unpkg.com/vue@2.6.10/dist/vue.min.js"></script>
+<script type="text/javascript">
+	var app = new Vue({
+		el:'#app',
+		data:{
+			status:1
+		},
+		methods:{
+			changeStatus:function(){
+				this.status===1?this.status=2:this.status=1;
+			}
+		}
+	})
+</script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>v-show</title>
+</head>
+<body>
+	<div id="app">
+		<p>v-show功能类似于v-if,表达式为真则显示</p>
+		<p>区别在于，v-show是操纵css属性中的display而v-if则是将dom移除</p>
+		<p>v-show不可以在&lt;template&gt;上使用</p>
+		<span v-show="status===1">status == 1则显示</span>
+		<script type="text/javascript">
+			var app = new Vue({
+				el:"#app",
+				data:{
+					status:2
+				}
+			})
+		</script>
+	</div>
+</body>
+</html>

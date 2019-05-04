@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>WebSocket</title>
+</head>
+<body>
+	<div style="width:60%">
+		<article>在一个单独的持久链接上提供全双工，双向通信,建立websocket对象后，会将http请求由浏览器发起连接，取得服务器响应后
+		，建立的连接会使用HTTP升级从升级HTTP协议交换为WEB Socket协议，需要支持该协议的服务器才可以正常工作</article>
+		<p>好处：</p>
+		<ul>
+			<li>建立连接时的开销小</li>
+			<li>数据包小，适合移动应用</li>
+		</ul>
+	</div>
+	<script type="text/javascript">
+		var socket = new WebSocket("ws://url");//绝对URL，且不需要管同源策略
+		console.log(socket.readyState);
+		
+		socket.onopen = function(){
+			console.log("open");
+			socket.send("Hello World");
+			var mess = {
+				time:new Date(),
+				text:"hello World"
+			};
+			socket.send(JSON.stringify(mess));
+		};
+		socket.onerror = function(){
+			console.log("error ");
+		};
+		socket.onclose = function(event){
+			console.log("close ");
+			console.log(event);
+			//三个属性，wasClean,code和reason
+		}
+	</script>
+</body>
+</html>

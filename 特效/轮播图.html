@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>轮播图特效-原生JS</title>
+	<style type="text/css">
+		#id{
+			position: absolute;
+		}
+		.list{
+
+		}
+		.list li{
+			position: absolute;
+			top: 0;
+			left: 0;
+			opacity: 1;
+		}
+		.current{
+
+		}
+		.count{
+			position: absolute;
+			top: 150px;
+			list-style: none;
+			left: 350px;
+		}
+		.count li{
+			padding: 10px;
+			float: left;
+			color: white;
+		}
+		@keyframes toNoTransparent{
+			from{opacity: 0;}
+	/*		25%{opacity: 0.25;}
+			50%{opacity: 0.5;}
+			75%{opacity: 0.75;}*/
+			to{opacity: 1;}
+		}
+		@keyframes toTransparent{
+			0%{opacity: 1;}
+			25%{opacity: 0.75;}
+			50%{opacity: 0.5;}
+			75%{opacity: 0.25;}
+			100%{opacity: 0;}
+		}
+		.ttt{
+			animation: toNoTransparent 1s ease;
+			-moz-animation:toNoTransparent 1s ease;
+			-webkit-animation:toNoTransparent 1s ease;
+			-o-animation:toNoTransparent 1s ease;
+		}
+		.ttt2{
+			animation: toTransparent 1s ease;
+			-moz-animation:toTransparent 1s ease;
+			-webkit-animation:toTransparent 1s ease;
+			-o-animation:toTransparent 1s ease;
+		}
+	</style>
+</head>
+<body>
+	<div id="box">
+		<ul class="list">
+			<li><img src="source/1.jpg"  width="490" height="200"></li>
+			<li><img src="source/2.jpg"  width="490" height="200"></li>
+			<li><img src="source/3.jpg"  width="490" height="200"></li>
+		</ul>
+		<ul class="count">
+			<li>1</li>
+			<li>2</li>
+			<li>3</li>
+		</ul>
+	</div>
+	<script type="text/javascript">
+		var oLi = document.getElementsByTagName("li");
+		var oImg = document.getElementsByTagName("img");
+		var oLi2 = document.getElementsByClassName('count')[0].getElementsByTagName('li');
+		function show(index){
+			for(var i=0;i<oImg.length;i++){
+				oLi[i].className = '';
+				oLi[i].style.opacity = 0;
+				oLi2[i].style.color = 'white';
+			}
+			oLi[index].style.opacity = '';
+			oLi[index].className = 'ttt';
+			//oImg[index].className = 'current';
+			oLi2[index].style.color = 'yellow';
+		}
+		var index = 0;
+		var timer = setInterval(function(){
+			if(index==2){
+				index = 0;
+			}else{
+				index++;
+			}
+			show(index);
+		},3000);
+		//var box = document.getElementById('box');
+		for(var i=0;i<oLi2.length;i++){
+			oLi2[i].addEventListener('mouseover',function(event){
+				var index = event.path[0].innerHTML-1;
+				console.log(index);
+				clearInterval(timer);
+				show(index);
+			})
+			oLi2[i].addEventListener('mouseout',function(){
+				timer = setInterval(function(){
+					if(index==2){
+						index = 0;
+					}else{
+						index++;
+					}
+					show(index);
+					},3000);
+			});
+		}
+	</script>
+</body>
+</html>

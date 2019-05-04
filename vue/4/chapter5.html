@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>特殊变量$event</title>
+</head>
+<body>
+	<div id="app">
+		<a href="http://www.apple.com" @click="handleClick('strictly forbidden open',$event)">打开链接</a>
+	</div>
+	<script  src="https://unpkg.com/vue@2.6.10/dist/vue.min.js"></script>
+	<script type="text/javascript">
+		var app = new Vue({
+			el:'#app',
+			methods:{
+				handleClick:function(str,event){
+					event.preventDefault();
+					window.alert(str);
+				}
+			}
+		})
+	</script>
+</body>
+</html>

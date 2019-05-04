@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>基本指令</title>
+</head>
+<style type="text/css">
+	[v-cloak]{
+		display: none;
+	}
+</style>
+<body>
+	<p>v-cloak，不需要表达式，它会在Vue实例结束编译时从绑定的HTML元素上移除，经常和CSS的display:none配合使用</p>
+	<p>主要用来解决初始化慢导致页面闪动的最佳实践</p>
+	<div id="app" v-cloak>
+		{{message}}
+		<div v-once>
+			<p>定义它的元素或组件只渲染一次，首次渲染之后，不再随着数据的变化重新渲染，将视为静态内容</p>
+			<span>{{message}}</span>
+		</div>
+	</div>
+	<script  src="https://unpkg.com/vue@2.6.10/dist/vue.min.js"></script>
+	<script type="text/javascript">
+		var app = new Vue({
+			el:'#app',
+			data:{
+				message:'this is a text'
+			}
+		})
+	</script>
+</body>
+</html>

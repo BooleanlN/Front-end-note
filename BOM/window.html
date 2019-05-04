@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>window对象</title>
+	<meta charset="utf-8">
+</head>
+<body>
+	<h3>window对象——BOM核心对象，代表浏览器的一个实例</h3>
+	<div style="width: 50%;height: 1000px;">
+		<article>
+			<section>
+				&nbsp;&nbsp;&nbsp;&nbsp;window既是通过JavaScript访问窗口的一个接口，又是ECMAScript规定的Global对象。
+			所有在全局作用域中声明的变量、函数都回变成window的属性和方法.但在window上定义的属性与全局变量还是有些区别：全局变量不能通过delete删除而window的属性可以
+			</section>
+			<strong>窗口位置</strong>
+			<section>
+				&nbsp;&nbsp;&nbsp;&nbsp;IE、Safari、Opera和Chrome都提供了ScreenLeft和ScreenTop属性来获取窗口相对于屏幕左边和上边的位置。FireFox则通过ScreenX和ScreenY来获取，Safari和Chrome同时支持这两种
+				<em>tips：IE、Opera中screenLeft和screenTop中保存的是从屏幕左边和上边到由window对象表示的页面可见区域的距离,而其他浏览器参照标准为整个浏览器窗口相对于屏幕的坐标值</em>
+			</section>
+			<strong>窗口大小</strong>
+			<section>
+				&nbsp;&nbsp;IE9+、safari、FireFox、Safari、Opera和Chrome提供innerWidth，innerHeight、outerWidth和outerHeight4个属性，返回视口的尺寸和浏览器窗口本身的尺寸。在这之前，通过document.documentElement.clientWidth获取页面视口信息。
+			</section>
+			<strong>导航和打开窗口</strong>
+			<section>
+				window.open(url,target,feature,bool);
+				<ul>
+					<li>target:已有窗口或者框架的名称</li>
+					<li>feature:逗号分隔的设置字符串，如“fullscreen=yes,height=400”，表示在新窗口中都显示哪些特性</li>
+					<li>bool:表示新窗口是否取代旧窗口的布尔值</li>
+				</ul>
+				window.open会返回一个指向新窗口的引用，引用的对象与其他window对象大致相似，但可以对其进行更多控制
+			</section>
+			<strong>超时调用和间歇调用</strong>
+			<section>一般认为，使用超时调用来模拟间歇调用是一种最佳模式，在开发环境下，很少使用真正的间歇调用，原因是后一个间歇调用可能会
+			在前一个间歇调用结束之前启动</section>
+			<strong>系统对话框</strong>
+			<section>同步和模态，显示这些对话框时代码会停止执行，关掉后，代码恢复执行。</section>
+		</article>
+	</div>
+	<frame name="kk"></frame>
+	<script type="text/javascript">
+		var age  = 22;
+		function sayAge(){
+			console.log(this.age);
+		}
+		console.log(window.age);
+		window.sayAge();
+		console.log(window);
+		//获取窗口位置
+		var loc = function getLoc(){
+			var lefLoc = (typeof window.screenLeft==="number"?window.screenLeft:window.screenX);
+			var topLoc = (typeof window.screenTop==="number"?window.screenTop:window.screenY);
+			var res = "("+lefLoc+","+topLoc+")";
+			return res;
+		}
+		console.log(loc());
+		//获取页面视口大小
+		var area = function getArea(){
+			var pageWidth = window.innerWidth,pageHeight = window.innerHeight;
+			if(typeof pageWidth !=="number")
+			{
+				//判断是否在标准模式
+				if(document.compatMode == "CSS1Compat")
+				{
+					pageWidth = document.documentElement.clientWidth;
+					pageHeight = document.documentElement.clientHeight;
+				}else{
+					pageWidth = document.body.clientWidth;
+					pageHeight = document.body.clientHeight;
+				}
+			}
+			return "("+pageWidth+","+pageHeight+")";
+		}
+		//调整浏览器窗口大小,默认是禁用的
+		var resize = function(width,height){
+			window.resizeTo(width,height);
+		}
+		//window.open
+		///var wroxWin = window.open('http://www.baidu.com','height=400,resizable=yes');
+		//wroxWin.resizeTo(500,500);
+		//对话框
+		var name = prompt("What's ur name","Michael");
+		console.log(name);
+		if (confirm("Are you sure?")){
+			alert("sure");
+		}else{
+			alert("not very sure");
+		}
+		window.find("查找字符串");
+		//window.print();//打印
+	</script>
+</body>
+</html>

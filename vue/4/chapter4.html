@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>列表渲染指令v-for</title>
+</head>
+<body>
+	<div id="app">
+		<p>v-for用于数组遍历或对象循环显示，需要结合in或者of来使用</p>
+		<ul>
+			<li v-for="book in books">{{book.name}}</li>
+		</ul>
+		<p>遍历对象属性</p>
+		<ul>
+		<li v-for= "(value,key,index) in user "> {{index}} - {{key}} : {{value}} </li> 
+		</ul>
+		<p>更新原数组，重新渲染</p>
+		<button @click="changeArr">change</button>
+	</div>
+	<script  src="https://unpkg.com/vue@2.6.10/dist/vue.min.js"></script>
+	<script type="text/javascript">
+		var app = new Vue({
+			el:'#app',
+			data:{
+				books:[
+					{name:'《Vue.js实战》'}
+					,{name:'《JS语言精粹》'}
+					,{name:'《js高级程序设计》'}
+				],
+				user:{
+					name:'Arson',
+					gender:'男',
+					age:26
+				}
+			},
+		 	methods:{
+		 		changeArr:function(){
+		 			this.books.push({
+		 				name:'《java 编程思想》'
+		 			});
+		 		}
+		 	}
+		})
+	</script>
+</body>
+</html>

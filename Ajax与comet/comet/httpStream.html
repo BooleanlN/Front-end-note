@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>HTTP流实现</title>
+</head>
+<body>
+	<h3>Http流，在整个生命周期使用一个HTTP连接，浏览器向服务端发送请求，服务器保持连接打开，然后周期性地向浏览器发送数据</h3>
+	<script type="text/javascript">
+		var xhr = new XMLHttpRequest();
+		var received = 0;//记录最新消息在消息流中的位置
+		var url = "http://localhost:8080/httpstream.php";
+		var result = "";
+		xhr.onreadystatechange = function(){
+			//	console.log(xhr.readyState);
+				if(xhr.readyState === 3)
+				{	
+						console.log("..");
+						result = xhr.responseText.substring(received);
+						console.log(result);
+						received+=result.length;
+						//发起新请求
+							
+				}else if(xhr.readyState===4){
+					console.log("完成消息推送")
+				}
+				
+		}
+		xhr.open("get",url);
+		xhr.send();
+	</script>
+</body>
+</html>

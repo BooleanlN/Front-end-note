@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>CSS3-背景篇</title>
+	<style type="text/css">
+		.bksize{
+			background: url('bg_flower.gif');
+			-moz-background-size:63px 100px;
+			background-size: 63px 100px;
+			background-repeat: no-repeat;
+			padding-top:80px;
+			width: 100px;
+			height: 100px;
+		}
+		.las{
+			background: url('bg_flower.gif');
+			background-size: 50% 100%;
+			-moz-background-size:50% 100%;
+			background-repeat:no-repeat;
+			padding-top:80px;
+			width: 100px;
+			height: 100px;
+		}
+	</style>
+</head>
+<body>
+	<h3>CSS3-背景篇</h3>
+	<strong>CSS3 background-size 属性</strong>
+	<em>background-size 属性规定背景图片的尺寸。
+
+在 CSS3 之前，背景图片的尺寸是由图片的实际尺寸决定的。在 CSS3 中，可以规定背景图片的尺寸，这就允许我们在不同的环境中重复使用背景图片。
+
+您能够以像素或百分比规定尺寸。如果以百分比规定尺寸，那么尺寸相对于父元素的宽度和高度。</em>
+	<div style="background: url('bg_flower.gif');width: 200px;height: 200px;"></div>
+	<div class="bksize">
+		
+	</div>
+	<div class="las">
+		
+	</div>
+</body>
+</html>

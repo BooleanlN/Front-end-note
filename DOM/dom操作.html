@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Dom操作</title>
+</head>
+<body>
+	<h3>Dom操作</h3>
+	<strong>动态脚本</strong>
+	<section>在页面加载时不存在，但将来的某一时刻通过修改DOM动态添加的脚本</section>
+	<strong>动态样式</strong>
+	<section>页面加载时不存在的样式</section>
+	<strong>操作表格</strong>
+	<script type="text/javascript">
+		//动态脚本
+		function add_script() {
+			// body...
+			var script = document.createElement("script");
+			script.type = "text/javascript";
+			script.src = "xxx.js";
+			document.body.append(script);
+		}
+		//动态样式
+		function add_style(){
+			var link = document.createElement("link");
+			link.rel = "stylesheet";
+			link.type = "text/css";
+			link.href = "sss.css";
+			var head = document.getElementsByTagName("head")[0];
+			head.appendChild(link);
+		}
+		//创建表格
+		function createTable(){
+			var table = document.createElement("table");
+			table.border = 1;
+			table.width = "100%";
+
+			var tbody = document.createElement("tbody");
+			table.appendChild(tbody);
+
+			tbody.insertRow(0);
+			tbody.rows[0].insertCell(0);
+			tbody.rows[0].cells[0].appendChild(document.createTextNode("Cell 1,1"));
+			tbody.rows[0].insertCell(1);
+			tbody.rows[0].cells[1].appendChild(document.createTextNode("Cell 2,1"));
+
+			tbody.insertRow(1);
+			tbody.rows[1].insertCell(0);
+			tbody.rows[1].cells[0].appendChild(document.createTextNode("Cell 1,2"));
+			tbody.rows[1].insertCell(1);
+			tbody.rows[1].cells[1].appendChild(document.createTextNode("Cell 2,2"));
+
+			document.body.appendChild(table);
+		}
+	</script>
+</body>
+</html>

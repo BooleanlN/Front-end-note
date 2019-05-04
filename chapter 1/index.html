@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="main.css">
+	<style type="text/css">
+		#hour,#minite{
+			width: 50px;
+			height: 50px;
+			background-color: #000;
+			color: white;
+		}
+		.clock{
+			width: 100px;
+			height: 80px;
+			border: 1px solid #ccc;
+		}
+		#canv{
+			margin-top: 50px;
+		}
+	</style>
+</head>
+<body>
+	<h1>CLOCK!kachi kachi!</h1>
+	<div class="clock">
+		<span id="hour">00</span>
+		<span id="minite">00</span>
+		<button onclick="start()" style="width: 50px;">start</button>
+	</div>
+	<canvas id="canv" width="500px" height="500px" style="background-color: yellow;"></canvas>
+	<script type="text/javascript">
+		let can = document.getElementById("canv");
+		let ctx = can.getContext("2d");
+
+		function timing(){
+		ctx.clearRect(0,0,500,500);
+
+		ctx.beginPath();
+		ctx.lineWidth = 5;
+		ctx.strokeStyle = "#0000ff";
+		ctx.arc(200,200,150,0*Math.PI,2*Math.PI,false);
+		ctx.stroke();
+		ctx.closePath();
+
+		//时钟刻度
+		for(let i=0;i<12;i++)
+		{
+			ctx.save();//保存初始状态
+			ctx.lineWidth = 7;
+			ctx.strokeStyle = "#000";
+			ctx.translate(200,200);
+			ctx.rotate(30*Math.PI*i/180);//绕画布左上角（0，0）处旋转，所以需要先translate
+
+			ctx.beginPath();
+			ctx.moveTo(0,-130);
+			ctx.lineTo(0,-140);
+			ctx.stroke();
+			ctx.closePath();
+
+			ctx.restore();//恢复初始状态
+		}
+		//分钟刻度
+		for(let i=0;i<60;i++)
+		{
+			ctx.save();//保存初始状态
+			ctx.lineWidth = 4;
+			ctx.strokeStyle = "#000";
+			ctx.translate(200,200);
+			ctx.rotate(6*Math.PI*i/180);//绕画布左上角（0，0）处旋转，所以需要先translate
+
+			ctx.beginPath();
+			ctx.moveTo(0,-135);
+			ctx.lineTo(0,-140);
+			ctx.stroke();
+			ctx.closePath();
+
+			ctx.restore();//恢复初始状态
+		}
+
+
+
+		//实时时钟
+		let date = new Date();
+		let hour = date.getHours()>12?date.getHours()-12:date.getHours();
+		let minite = date.getMinutes();
+		let second = date.getSeconds();
+		//时针
+		ctx.save();
+		ctx.translate(200,200)
+		ctx.lineWidth = 5;
+		ctx.strokeStyle = "#000";;
+		ctx.rotate((hour*60+minite)/720*Math.PI*2);
+
+		ctx.beginPath();
+		ctx.moveTo(0,10);
+		ctx.lineTo(0,-80);
+		ctx.stroke();
+		ctx.closePath();
+		ctx.restore();
+
+		//分针
+		ctx.save();
+		ctx.lineWidth = 3;
+		ctx.strokeStyle = "#000";
+		ctx.translate(200,200);
+		ctx.rotate(minite*Math.PI*2/60);
+		ctx.beginPath();
+		ctx.moveTo(0,10);
+		ctx.lineTo(0,-100);
+		ctx.stroke();
+		ctx.closePath();
+		ctx.restore();
+
+		//秒针
+		ctx.save();
+		ctx.lineWidth = 2;
+		ctx.strokeStyle = "red";
+		ctx.translate(200,200);
+		ctx.rotate(second*Math.PI*2/60);
+		ctx.beginPath();
+		ctx.moveTo(0,10);
+		ctx.lineTo(0,-120);
+		ctx.stroke();
+		ctx.closePath();
+		ctx.restore();
+
+		ctx.save();
+		ctx.translate(200,200);
+		ctx.beginPath();
+		ctx.strokeStyle = "red";
+		ctx.arc(0,0,5,0,2*Math.PI);
+		ctx.stroke();
+		ctx.fillStyle = "red";
+		ctx.fill();
+		ctx.closePath();
+		ctx.restore();
+		}
+		timing();
+		setInterval(timing,1000);
+		//console.log(date); 
+
+	</script>
+	<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+	<script src="main.js"></script> 
+	<script type="text/javascript" src="clock/clock.js" defer="true"></script> 
+</body>
+</html>

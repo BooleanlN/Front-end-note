@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>slot-分发内容</title>
+</head>
+<body>
+	<div id="app">
+		<child-component>
+			<p>分发的内容</p>
+			<p>更多分发的内容</p>
+		</child-component>
+
+		<p>具名slot</p>
+		<child-component2>
+			<h2 slot="header">HEADER</h2>
+			<div slot="body">
+				<p>正文部分</p>
+			</div>
+			<div>不指定是否会出现？(有非具名slot则出现，否则不出现)</div>
+		</child-component2>
+		<p>作用域slot</p>
+		<p>props作为临时变量获取slot上的数据msg</p>
+		<component-a>
+			<template scope="props">
+				<p>来自父组件的内容</p>
+				<p>{{props.msg}}</p>
+			</template>
+		</component-a>
+		<!-- 首先通过v-bind绑定父级books变量 -->
+		<my-list :books="books">
+			<template slot="book" scope="props">
+				<li>{{props.bookName}}</li>
+			</template>
+		</my-list>
+	</div>
+	<script src="https://unpkg.com/vue@2.6.10/dist/vue.min.js"></script>
+	<script type="text/javascript">
+		Vue.component('child-component',{
+			template:'\
+			<div>\
+				<slot>\
+					<p>如果父组件没有插入内容，我将作为默认出现</p>\
+				</slot>\
+			</div>'
+		});
+		//具名slot
+		Vue.component('child-component2',{
+			template:'\
+			<div class="container">\
+				<div class="header">\
+					<slot name="header"></slot>\
+				</div>\
+				<div class="body">\
+					<slot name="body"></slot>\
+				</div>\
+				<slot></slot>\
+			</div>',
+			mounted:function(){
+				var header = this.$slots.header;
+				var body = this.$slots.body;
+				var def  = this.$slots.default;
+				console.log(header);
+				console.log(body);
+				console.log(def);			}
+		});
+		//作用域插槽
+		Vue.component('component-a',{
+			template:'\
+			<div class="container">\
+				<slot msg="来自子组件的内容"></slot>\
+				</div>'
+		});
+		Vue.component('my-list',{
+			//books接收父级books
+			props:{
+				books:{
+					type:Array,
+					default:function(){
+						return [];
+					}
+				}
+			},
+			//:book-name为作用域slot一部分，暴露出来，通过scope变量访问
+			template:'\
+			<ul>\
+				<slot name="book" v-for="book in books"\
+				:book-name="book.name">\
+				</slot>\
+			</ul>'
+		})
+		var app = new Vue({
+			el:'#app',
+			data:{
+				books:[
+				{name:"《fuck》"},
+				{name:"《this》"},
+				{name:"《moment》"}
+				]
+			}
+		})
+	</script>
+</body>
+</html>

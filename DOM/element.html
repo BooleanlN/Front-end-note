@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Element类型</title>
+	<style type="text/css">
+	.test{
+		width: 500px;
+		font-size: 14px;
+		color: red;
+	}
+</style>
+</head>
+<body>
+	<div id="test" title="tips" style="background-color: black;" dir="rtl" lang="en" class="test">
+		<p>测试节点</p>
+	</div>
+	<div style="width: 60%">
+		Element类型用于表现XML或HTML元素，提供了对元素标签名、子节点及特性的访问
+		<strong>HTLElement</strong>
+		<section>所有的HTML元素都由HTMLElement类型表示，HTMLElement类型继承自Element</section>
+		<strong>添加属性</strong>
+		<ul>
+			<li>id</li>
+			<li>title，附加说明信息</li>
+			<li>lang</li>
+			<li>dir，语言方向</li>
+			<li>className</li>
+		</ul>
+		<strong>取得特性</strong>
+		<section>
+			操作方法：
+			<ul>
+				<li>getAttribute("特性名")</li>
+				<li>setAttribute("特性名","值")</li>
+				<li>removeAttribute("特性名"),彻底删除节点属性</li>	
+				<li>也可以通过属性方式直接访问节点特性，如node.style，通过该方法也可以设置属性值</li>
+			</ul>
+			attributes属性：包含一个NamedNodeMap,包含一系列节点，每个节点的nodeName就是特性名称
+		</section>
+		<strong>创建元素</strong>
+		<section>
+			document.createElement("标签名");
+
+		</section>
+	</div>
+	<script type="text/javascript">
+		var node = document.getElementById('test');
+		node.getAttribute("id");
+		node.getAttribute("class");
+		function outputAttributes(element){
+			var pairs = new Array(),attrName,attrValue,i,len;
+			for(var i=0,len=element.attributes.length;i<len;i++)
+			{
+				attrName =  element.attributes[i].nodeName;
+				attrValue = element.attributes[i].nodeValue;
+				pairs.push(attrName+"=\""+attrValue+"\"");
+			}
+			return pairs.join(" ");
+		}
+		//新节点
+		var input = document.createElement("input");
+		input.id="newinput";
+		input.style["width"] = "500px";
+		input.placeholder = "新输入框";
+		node.appendChild(input);	
+	</script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>location对象</title>
+</head>
+<body>
+	<h3>location对象</h3>
+	<div style="width: 60%">
+		<article>
+			<strong>概述</strong>
+			<section>location提供了与当前窗口中加载的文档有关的信息，还提供了一些导航功能</section>
+			<section>location常用属性：
+				<ul>
+					<li>hash-返回url中的hash</li>
+					<li>host-返回url中的服务器名称和端口号</li>
+					<li>hostname-返回url不带端口号的服务器名称</li>
+					<li>href-返回当前加载页面的完整URL</li>
+					<li>pathname-返回URL中的目录和文件名</li>
+					<li>port-返回端口号</li>
+					<li>protocol-返回页面使用的协议</li>
+					<li>search-返回URL的查询字符串，以问号开头</li>
+				</ul>
+			</section>
+			<strong>位置操作</strong>
+			<section>
+				location.assign(URL)//立即打开新URL，并在浏览器历史记录生成一条记录
+				也可以直接修改location属性，如location.hash="newhash";
+				location.replace(URL)//导航到新URL，但不生成历史记录。
+				location.reload()//重新加载当前页面，若未传递任何参数，则一般是从缓存中加载
+				location.reload(true)//强制从服务端加载
+			</section>
+			<strong title="abc">常用功能</strong>
+			<section >
+				<ul>
+					查找元素
+					<li>document.getElementById('idname')</li>
+					返回HTMLCollection对象
+					<li>document.getElementsByTagName('tagname')</li>
+					<li>document.getElementsByName()</li>
+					<li>document.getElementsByClassName()</li>
+					<li>document.anchors:带name特性的a元素</li>
+					<li>document.forms,所有form元素</li>
+					<li>document.images,所有img元素</li>
+					<li>document.links，所有带href的a元素</li>
+				</ul>
+			</section>
+			<strong>文档写入</strong>
+			<section>
+				<script type="text/javascript">
+								document.write("abc");
+				</script>
+			</section>
+		</article>
+	</div>
+	<script type="text/javascript">
+		function getItems(){
+			var qs = (location.search.length>0?location.search.substring(1):"");
+			var args = {};
+			var items = qs.length?qs.split("&"):[],item = null,name = null,value = null;
+			for(i of items){
+				item = i.split("=");
+				name = decodeURIComponent(item[0]);
+				value = decodeURIComponent(item[1]);
+				if(name){
+					args[name] = value;
+				}
+			}
+			console.log(args);
+			return args;
+		}
+	</script>
+</body>
+</html>

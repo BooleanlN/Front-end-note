@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>长查询</title>
+</head>
+<body>
+	<h3>长查询</h3>
+	<p>长查询其实是短查询的翻版，长查询向服务端发起连接后，服务端一直保持连接打开，直到有数据可以发送，发送完数据后，浏览器关闭连接，随即又
+		<br>发起新请求</p>
+	<script type="text/javascript">
+		var xhr = new XMLHttpRequest();
+		let url = "https://www.apiopen.top/novelApi";
+		xhr.onload = function(){
+			if(xhr.readyState == 4)
+				{	
+					if((xhr.status>=200&&xhr.status<300)||xhr.status===304)
+					{
+						console.log(xhr.responseText);
+						//发起新请求
+						xhr.open("get",url,true);
+						xhr.send();
+					}else{
+						console.log("Request was fail"+xhr.status);
+					}
+				}
+			}
+		xhr.open("get",url,true);
+		xhr.send();
+	</script>
+</body>
+</html>

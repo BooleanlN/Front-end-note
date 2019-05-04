@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>CSS3——文本效果</title>
+	<style type="text/css">
+		h2{
+			text-shadow: 5px 5px 5px #FF0000;
+		}
+		.hh{	
+			word-wrap: break-word;
+		}
+		.box{
+			width:12em;
+			border:1px solid #ccc;
+			white-space:nowrap;
+			overflow: hidden;
+		}
+		.prap{
+			width:11em; 
+			border:1px solid #000000;
+			word-break:hyphenate;
+		}
+	</style>
+</head>
+<body>
+	<h3>文本效果</h3>
+	<strong>文本阴影</strong>
+	<h2>文本阴影效果</h2>
+	<strong>自动换行</strong>
+	<div style="width: 350px;height: 100px;border:1px solid #ccc;">
+		<p class="hh">This paragraph contains a very long word: thisisaveryveryveryveryveryverylongword. The long word will break and wrap to the next line.</p>
+	</div>
+	<strong>溢出处理</strong>
+	<div style="text-overflow:ellipsis;" class="box">
+		<p>This paragraph contains a very long word: thisisaveryveryveryveryveryverylongword. The long word will break and wrap to the next line.</p>
+	</div>
+	<strong>断字换行</strong>
+	<p class="prap">This paragraph contains a very long word: thisisaveryveryveryveryveryverylongword. The long word will break and wrap to the next line.</p>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>CORS-IE的对策</title>
+</head>
+<body>
+	<p>CORS-Cross-Origin Resource Sharing</p>
+	<p>IE的对策：在ie8\9中引入了XDR类型，与XHR类似，但可以实现安全可靠的跨域通信</p>
+	<p>其他浏览器对策：通过XHR基础上实现，若open()方法中为绝对URL，则会触发CORS</p>
+	<p>跨域XHR的限制：</p>
+	<ul>
+		<li>不能使用setRequestHeader()设置自定义头部</li>
+		<li>不能发送和接收cookie</li>
+		<li>调用getAllResponseHeaders()方法总返回空字符串</li>
+	</ul>
+	<h3>预检请求preflight request（IE10及之前不支持）</h3>
+	<p>当请求为非简单请求时，会自动发送一个预检请求，要求服务器可以确认该请求，请求方法为options</p>
+	<ul>
+		<li>PUT</li><li>DELETE</li><li>CONNECT</li><li>OPTIONS</li><li>TRACE</li><li>PATCH</li>
+	</ul>
+	<p>或人为设置了对CORS安全的首部字段之外的首部字段值：</p>
+	<p>Accept、Accept-Language、Content-Language、Content-Type、DPR、Downlink、Save-Data、Viewport-Width、Width、Content-Type的值不属于下列之一:
+application/x-www-form-urlencoded、
+multipart/form-data、
+text/plain</p>
+	<button onclick="pso()">XDR请求</button>
+	<script type="text/javascript" src="corsIE.js"></script>
+	<script type="text/javascript">
+		
+	</script>
+</body>
+</html>

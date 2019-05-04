@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>组件</title>
+</head>
+<body>
+	<div id="app">
+		<my-component></my-component>
+		<my-component2></my-component2>
+		<p>组件模板有时候会受到HTML的限制，如table规定内部只允许tr、td、td等表格元素，<br>此时可以使用特殊的
+		is属性来挂载组件：</p>
+		<table>
+			<tbody is="my-component"></tbody>
+		</table>
+		<p>除了template以外，组件中还可以像Vue实例那样使用其他选项，如data,computed,methods等，<br>但是在使用data时，data必须是函数，然后将数据return出去</p>
+		<code>
+			Vue.component('my-component',{
+			template:'',
+			data:function(){
+				return {
+					message:'组件内data'
+				}
+			}
+		});//在实例注册前注册，全局注册
+		</code>
+	</div>
+	<script  src="https://unpkg.com/vue@2.6.10/dist/vue.min.js"></script>
+	<script type="text/javascript">
+		var child = {
+			template:'<div>局部注册组件,只在该实例作用域下有效</div>'
+		}
+		Vue.component('my-component',{
+			template:'<div>组件内容!!!{{message}}</div>',
+			data:function(){
+				return {
+					message:'组件内data'
+				}
+			}
+		});//在实例注册前注册，全局注册
+		var app = new Vue({
+			el:'#app',
+			components:{
+				'my-component2':child
+			}
+		})
+	</script>
+</body>
+</html>

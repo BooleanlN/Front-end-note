@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Ajax 2级</title>
+</head>
+<body>
+	<h2>XMLHttpRequest 2级</h2>
+	<em>相比于1级增加的功能</em>
+	<ul>
+		<li>FormData类型，为序列化表单及创建与 <strong>表单格式</strong>相同的数据提供了便利</li>
+		<li>超时设定：为XHR对象增加了timeout属性，表示请求在等待响应多少毫秒之后就终止，ontimeout事件用于处理超时</li>
+		<li>overrideMimeType()方法：用于重写XHR响应的MIME类型</li>
+		<li>进度事件：
+			<ul>
+				<li>loadstart</li>
+				<li>progress：接收数据时周期性触发</li>
+				<li>error</li>
+				<li>abort</li>
+				<li>load：代替readystatechange事件</li>
+				<li>loadend</li>
+			</ul>
+		</li>
+	</ul>
+	<button onclick="ptos()">get按钮</button>
+	<div id="status"></div>
+	<script type="text/javascript" src="ajax.js"></script>
+	<script type="text/javascript" src="ajax2.js"></script>
+	<script type="text/javascript">
+		
+	</script>
+</body>
+</html>

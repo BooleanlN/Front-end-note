@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>navigator对象</title>
+</head>
+<body>
+	<h3>navigator对象</h3>
+	<section>
+		navigator对象是识别客户端浏览器的事实标准，每个浏览器中的navigator对象都有一套自己的属性。
+	</section>
+	<strong>检测插件</strong>
+	<section>
+		<code style="font-size: 16px;">
+			<pre>
+				//other
+			function hasPlugin(name){
+				name = name.toLowerCase();
+				for(var i=0;i&lt;navigator.plugins.length;i++)
+				{
+					if(navigator.plugins[i].name.toLowerCase().indexOf(name)>-1)
+					{
+						return true;
+					}
+				}
+			}
+			</pre>
+			<pre>
+				//IE
+			function hasIEPlugin(name){
+				try{
+					new ActiveXObject(name);
+					return true;
+				}catch(ex){
+					return false;
+				}
+			}
+			</pre>
+		</code>
+	</section>
+	<section></section>
+	<script type="text/javascript">
+		//插件检测，除IE外
+		function hasPlugin(name){
+			name = name.toLowerCase();
+			for(var i=0;i<navigator.plugins.length;i++)
+			{
+				if(navigator.plugins[i].name.toLowerCase().indexOf(name)>-1)
+				{
+					return true;
+				}
+			}
+		}
+		//IE插件检测
+		function hasIEPlugin(name){
+			try{
+				new ActiveXObject(name);
+				return true;
+			}catch(ex){
+				return false;
+			}
+		}
+	</script>
+</body>
+</html>		

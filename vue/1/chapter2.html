@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>date</title>
+</head>
+<body>
+	<div id="app">
+		{{ date }}
+		<span v-html="link">这是一个连接</span>
+		<span v-pre>{{不编译	}}</span>
+		<div clear='both'></div>
+		<span>{{10/2}} {{isOk?'确定':'取消'}}{{text.split(',').reverse().join(',')}}</span>
+	</div>
+	<script  src="https://unpkg.com/vue@2.6.10/dist/vue.min.js"></script>
+	<script>
+		var app=new Vue({
+			el:'#app',
+			data:{
+				date:new Date(),
+				link:'<a href="www.baidu.com">百度</a>',
+				isOk:true,
+				text:'123,456'
+			},
+			mounted:function(){
+				var _this = this;
+				this.timer = setInterval(function(){
+					_this.date = new Date();
+				},1000);
+
+			},
+			beforeDestory:function(){
+				if(this.timer){
+					clearInterval(this.timer);
+				}
+			}
+		})
+	</script>
+</body>
+</html>

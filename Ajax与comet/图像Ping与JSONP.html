@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>其他跨域技术-图像Ping与JSONP</title>
+</head>
+<body>
+	<h3>图像Ping</h3>
+	<em>通过动态创建图像，借助一个网页可以从任何一个网页中加载图像的原理，实现跨域请求,缺点是无法拿到具体返回数据常用于广告</em>
+	<h3>JSONP</h3>
+	<em>JSON with padding,JSONP由两部分组成，回调函数和数据，JSONP通过动态script元素使用使用时可以为src属性指定一个跨域URL</em>
+	<script type="text/javascript">
+		var img = new Image();
+		img.onload = img.onerror = function(){
+			console.log("Done!");
+		};
+		img.src = "http://localhost:8080/testGet.php?name=4";
+		function handleRes(response){
+			console.log(response);
+		}
+	</script>
+	<script type="text/javascript" src="http://localhost:8080/jsonp.php?jsoncallback=handleRes"></script>
+</body>
+</html>

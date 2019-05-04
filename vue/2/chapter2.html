@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>计算属性用法</title>
+</head>
+<body>
+	<div id="app">
+		总价:{{prices}}
+		<p>当改变商品的属性时，价格会触发computed，重新计算，自动更新</p>
+		<p>计算属性可以依赖其他计算属性，同时不仅可以依赖当前实例，还可以依赖其他Vue实例的数据</p>
+		<p>相比于method,计算属性基于依赖缓存，只有计算属性所依赖的某个值更新时，她才会重新进行计算，更新</p>
+		<p>而method只要重新渲染就会调用，所以当进行大量计算时，使用计算属性</p>
+	</div>
+	<script  src="https://unpkg.com/vue@2.6.10/dist/vue.min.js"></script>
+	<script type="text/javascript">
+		var app = new Vue({
+			el:'#app',
+			data:{
+				package1:[
+					{
+						name:'Iphone7',
+						price:7199,
+						count:2
+					},
+					{
+						name:'iPad',
+						price:2888,
+						count:1
+					},
+				],
+				package2:[
+					{
+						name:'apple',
+						price:3,
+						count:5
+					},
+					{
+						name:'banana',
+						price:2,
+						count:10
+					}
+				]
+			},
+			computed:{
+				prices:{
+					get:function(){
+						var prices  = 0;
+						for (let i = 0;i<this.package1.length;i++) {
+							prices+=this.package1[i].price*this.package1[i].count;
+						}
+						for (let i = 0;i<this.package2.length;i++) {
+							prices+=this.package2[i].price*this.package2[i].count;
+						}
+						return prices;
+					},
+					set:function(newValue){
+						console.log("changed");
+					}
+				}
+			}
+		})
+	</script>
+</body>
+</html>

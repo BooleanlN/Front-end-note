@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>数据验证</title>
+</head>
+<body>
+	<div id="app">
+		<p>对prop进行验证时，采用对象写法</p>
+		<my-component prop-A=5 prop-C=false prop-G=5></my-component>
+	</div>
+	<script  src="https://unpkg.com/vue@2.6.10/dist/vue.min.js"></script>
+	<script type="text/javascript">
+		Vue.component('my-component',{
+			props:{
+				propA:Number,
+				propB:[String,Number],
+				propC:{
+					type:Boolean,
+					default:true
+				},
+				propD:{
+					type:Number,
+					required:true
+				},
+				propE:{
+					type:Array,
+					default:function(){
+						return [];
+					}
+				},
+				propF:{
+					type:Object,
+					default:function(){
+						return {fuck:'yes'};
+					}
+				},
+				propG:{
+					validator:function(value){
+						return value>10;
+					}
+				}
+			},
+			template:"<div>{{propA}}{{propC}}{{propF.fuck}}{{propG}}</div>"
+		});
+		var app = new Vue({
+			el:'#app',
+
+		})
+	</script>
+</body>
+</html>
