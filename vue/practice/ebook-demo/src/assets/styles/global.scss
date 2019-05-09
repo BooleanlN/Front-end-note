@@ -1,0 +1,46 @@
+@import "reset";
+//1 rem = 1 font-size
+//1 px = (1/font-size) rem
+$font-size: 37.5;
+@function px2rem($px){
+  @return ($px / $font-size) + rem;
+}
+@mixin center(){
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.icon {
+  color: #333;
+  font-size: px2rem(20);
+}
+.slide-up-enter,.slide-up-leave-to{
+  transform: translate3d(0,px2rem(108),0);//进入前向下移出
+}
+.slide-down-enter-to,.slide-down-leave,
+.slide-up-enter-to,.slide-up-leave{
+  transform: translate3d(0,0,0);//回到原位
+}
+.slide-down-enter-active,.slide-down-leave-active,
+.slide-up-enter-active,.slide-up-leave-active,
+.fade-enter-active,.fade-leave-active{
+  transition: all .3s linear;//过渡动画
+}
+//.slide-right-enter-active,.slide-right-leave-active{
+//  transition: all .5s linear;
+//}
+.slide-down-enter,.slide-down-leave-to{
+  transform: translate3d(0,-100%,0);
+}
+.fade-enter-to,.fade-leave{
+  opacity: 1;
+}
+.fade-enter,.fade-leave-to{
+  opacity: 0;
+}
+.slide-right-enter,.slide-right-leave-to{
+  transform: translate3d(-100%,0,0);
+}
+.slide-right-enter-to,.slide-right-leave{
+  transform: translate3d(0,0,0);
+}

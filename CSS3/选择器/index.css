@@ -1,0 +1,29 @@
+*{
+	margin:0;
+	padding: 0;
+}
+body{
+	color: black;
+}
+.box{
+	width: 100%;
+}
+#section1{
+	color: red;
+}	
+.title h3{
+	color:blue;
+}
+.title > h3{
+ font-style: italic;
+}
+.paper,footer{
+	background-color: orange;
+}
+.header + div{
+	font-style: italic;
+}
+[data|="data"]{
+	font-size: 5px;
+	color: gray;
+}
